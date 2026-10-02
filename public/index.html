@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AspectLens — Aspect-Based Sentiment Analysis & Product Intelligence</title>
+  <meta name="description" content="Premium ABSA Intelligence Dashboard with real-time aspect extraction, product matrices, head-to-head comparisons, and EDA analytics.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- GSAP Core + Plugins -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+
+  <!-- Clerk JS (CDN - vanilla, no bundler) -->
+  <script async crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+</head>
+<body>
+
+  <!-- Ambient Background -->
+  <div class="ambient-bg" aria-hidden="true"></div>
+
+  <!-- Floating Ambient Orbs (GSAP animated) -->
+  <div class="ambient-orb orb-1" aria-hidden="true"></div>
+  <div class="ambient-orb orb-2" aria-hidden="true"></div>
+  <div class="ambient-orb orb-3" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- SPLASH / LOADING SCREEN                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <div class="splash-screen" id="splash-screen">
+    <div class="splash-logo">
+      Aspect<span class="splash-gradient">Lens</span>
+    </div>
+    <div class="splash-bar">
+      <div class="splash-bar-fill" id="splash-bar-fill"></div>
+    </div>
+    <div class="splash-tagline">Aspect-Based Sentiment Intelligence</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- APP SHELL (hidden until splash completes)                         -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <div class="app-shell" id="app-shell">
+
+    <!-- Header / Navigation Bar -->
+    <header class="app-header">
+      <div class="header-container">
+        <div class="brand" id="brand">
+          <div class="brand-icon">⚡</div>
+          <div class="brand-text">
+            <h1>Aspect<span class="gradient-text">Lens</span></h1>
+            <p class="tagline">Aspect-Based Sentiment Analysis & Product Intelligence</p>
+          </div>
+        </div>
+        <nav class="nav-tabs" id="nav-tabs" role="tablist">
+          <!-- Sliding indicator pill -->
+          <div class="nav-indicator" id="nav-indicator"></div>
+
+          <button class="nav-tab active" data-tab="tab-sandbox" role="tab" id="tab-btn-sandbox">
+            <span class="tab-icon">⚡</span> Live Sandbox
+          </button>
+          <button class="nav-tab" data-tab="tab-matrix" role="tab" id="tab-btn-matrix">
+            <span class="tab-icon">📊</span> Product Matrix
+          </button>
+          <button class="nav-tab" data-tab="tab-compare" role="tab" id="tab-btn-compare">
+            <span class="tab-icon">⚔️</span> Comparator
+          </button>
+          <button class="nav-tab" data-tab="tab-url-compare" role="tab" id="tab-btn-url-compare">
+            <span class="tab-icon">🔗</span> Live URL Compare
+          </button>
+          <button class="nav-tab" data-tab="tab-analytics" role="tab" id="tab-btn-analytics">
+            <span class="tab-icon">📈</span> Analytics
+          </button>
+        </nav>
+        <!-- Auth Area -->
+        <div class="auth-area" id="auth-area">
+          <div class="auth-loading" id="auth-loading">
+            <div class="auth-spinner"></div>
+          </div>
+          <button class="auth-signin-btn" id="auth-signin-btn" style="display:none">
+            <span class="auth-icon">🔐</span> Sign In
+          </button>
+          <div id="clerk-user-button" style="display:none"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-content">
+
+      <!-- =================================================================== -->
+      <!-- TAB 1: LIVE REVIEW SANDBOX                                          -->
+      <!-- =================================================================== -->
+      <section id="tab-sandbox" class="tab-pane active" role="tabpanel">
+        <div class="pane-header" data-anim="fade-up">
+          <h2>⚡ Real-Time Review Analyzer</h2>
+          <p>Paste any customer review <strong>or an e-commerce product URL</strong> to extract real reviews and run aspect-opinion-sentiment analysis.</p>
+        </div>
+
+        <!-- Mode Toggle: Text vs URL -->
+        <div class="mode-toggle-bar" data-anim="fade-up">
+          <button class="mode-btn active" data-mode="text" id="mode-btn-text">
+            <span class="mode-icon">✏️</span> Paste Review Text
+          </button>
+          <button class="mode-btn" data-mode="url" id="mode-btn-url">
+            <span class="mode-icon">🔗</span> Paste Product URL
+          </button>
+        </div>
+
+        <!-- Quick Preset Demo Buttons (Text Mode only) -->
+        <div class="presets-bar" data-anim="fade-up" id="presets-bar">
+          <span class="presets-label">Quick Demos:</span>
+          <button class="preset-btn" data-text="The active noise cancellation is phenomenal and sound quality is crisp, but the headband gets uncomfortable during long flights.">🎧 Headphones ANC</button>
+          <button class="preset-btn" data-text="Camera performance in daylight is phenomenal, but low light photos look grainy and battery drain is terrible!">📱 Camera & Battery</button>
+          <button class="preset-btn" data-text="The cooling system is horrible and keyboard gets very hot, but screen refresh rate is silky smooth.">💻 Gaming Laptop</button>
+          <button class="preset-btn" data-text="Espresso extraction is rich with thick crema, but descaling cycle is complicated and water reservoir is too small.">☕ Espresso Machine</button>
+          <button class="preset-btn" data-text="Cushioning is plush and soft for running, but outsole grip is slippery on wet roads and toe box is too tight.">👟 Running Shoes</button>
+        </div>
+
+        <!-- TEXT MODE: Input Card -->
+        <div class="card input-card" data-anim="fade-up" id="text-input-card">
+          <div class="input-header">
+            <label for="review-input-text" class="input-label">Customer Review Text</label>
+            <span class="char-count" id="char-counter">0 chars</span>
+          </div>
+          <textarea id="review-input-text" rows="4" placeholder="Enter customer feedback (e.g. 'Battery life is mind-blowing lasting 16 hours, but 8GB RAM is insufficient and price is way too high...')" class="review-textarea"></textarea>
+
+          <div class="input-actions">
+            <button id="btn-analyze" class="btn btn-primary">
+              <span class="btn-icon">⚡</span> Run Analysis
+            </button>
+            <button id="btn-clear" class="btn btn-secondary">Clear</button>
+          </div>
+        </div>
+
+        <!-- URL MODE: Input Card -->
+        <div class="card input-card hidden" data-anim="fade-up" id="url-input-card">
+          <div class="input-header">
+            <label for="url-input" class="input-label">Product URL</label>
+            <span class="url-platform-badge" id="url-platform-badge"></span>
+          </div>
+          <div class="url-input-wrapper">
+            <span class="url-input-icon">🔗</span>
+            <input type="url" id="url-input" class="url-input" placeholder="Paste Amazon, Flipkart, or e-commerce product URL here..." autocomplete="off" spellcheck="false" />
+          </div>
+          <div class="url-hint">
+            <span>Supported:</span> Amazon, Flipkart, Meesho, Myntra, Nykaa, Snapdeal, or any e-commerce product link
+          </div>
+
+          <div class="input-actions">
+            <button id="btn-scrape" class="btn btn-primary btn-scrape">
+              <span class="btn-icon">🔍</span> Scrape & Analyze Reviews
+            </button>
+            <button id="btn-clear-url" class="btn btn-secondary">Clear</button>
+          </div>
+        </div>
+
+        <!-- Output Results Card (Text Mode) -->
+        <div id="sandbox-results" class="card results-card hidden">
+          <div class="results-header">
+            <div class="results-meta">
+              <h3>Extracted Aspect Intelligence</h3>
+              <span id="aspect-count-badge" class="badge badge-info">0 Aspects</span>
+            </div>
+          </div>
+
+          <div id="aspect-cards-grid" class="aspect-grid">
+            <!-- Dynamic Aspect Cards Injected Here -->
+          </div>
+
+          <!-- Raw JSON collapsible viewer -->
+          <details class="json-viewer">
+            <summary>View JSON API Response</summary>
+            <pre id="json-raw-output">{}</pre>
+          </details>
+        </div>
+
+        <!-- Output Results Card (URL/Scrape Mode) -->
+        <div id="scrape-results" class="hidden">
+          <!-- Product Header Card -->
+          <div class="card scrape-product-card" id="scrape-product-header">
+            <div class="scrape-product-info">
+              <div class="scrape-product-meta">
+                <span class="scrape-platform-pill" id="scrape-platform">Amazon</span>
+                <h3 id="scrape-product-name">Product Name</h3>
+                <div class="scrape-stats-row">
+                  <span class="scrape-stat" id="scrape-stat-reviews">
+                    <span class="stat-icon">📝</span> <strong id="scrape-review-count">0</strong> Reviews Scraped
+                  </span>
+                  <span class="scrape-stat" id="scrape-stat-aspects">
+                    <span class="stat-icon">🔬</span> <strong id="scrape-aspect-count">0</strong> Aspects Extracted
+                  </span>
+                  <span class="scrape-stat" id="scrape-stat-rating">
+                    <span class="stat-icon">⭐</span> <strong id="scrape-avg-rating">—</strong> Avg Rating
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Aggregated Sentiment Summary -->
+          <div class="card" id="scrape-aggregated-card">
+            <h3 class="section-title">📊 Aggregated Sentiment Summary</h3>
+            <div id="scrape-aggregated-grid" class="category-grid">
+              <!-- Category summary cards injected here -->
+            </div>
+          </div>
+
+          <!-- Individual Review Cards -->
+          <div class="card" id="scrape-reviews-card">
+            <h3 class="section-title">📝 Individual Review Analysis</h3>
+            <div id="scrape-reviews-list" class="scrape-reviews-list">
+              <!-- Review cards injected here -->
+            </div>
+          </div>
+
+          <!-- Raw JSON viewer -->
+          <details class="json-viewer">
+            <summary>View Full JSON Response</summary>
+            <pre id="scrape-json-output">{}</pre>
+          </details>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- TAB 2: PRODUCT ASPECT MATRIX                                        -->
+      <!-- =================================================================== -->
+      <section id="tab-matrix" class="tab-pane" role="tabpanel">
+        <div class="pane-header" data-anim="fade-up">
+          <h2>📊 Product Intelligence Matrix</h2>
+          <p>Explore sentiment across 8 Canonical Categories with Net Sentiment Scores (NSS) and sub-aspect breakdowns.</p>
+        </div>
+
+        <!-- Product Selector & Live Scrape Drawer -->
+        <div class="card controls-card" data-anim="fade-up">
+          <div class="control-group">
+            <label for="product-select" class="control-label">Select Analyzed Product</label>
+            <select id="product-select" class="form-select">
+              <option value="" disabled selected>Loading products from dataset...</option>
+            </select>
+          </div>
+          <div class="matrix-scrape-bar" style="margin-top: 14px; border-top: 1px solid var(--border-subtle); padding-top: 12px;">
+            <details class="fallback-details">
+              <summary class="fallback-summary">🔗 Add new product to Matrix from Live URL</summary>
+              <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+                <input type="url" id="matrix-url-input" class="url-input" style="flex: 1; min-width: 260px;" placeholder="Paste Amazon or Flipkart product URL..." autocomplete="off" />
+                <button id="btn-matrix-scrape" class="btn btn-primary" style="padding: 10px 18px; font-size: 13px;">
+                  <span>📥</span> Scrape & Add to Matrix
+                </button>
+              </div>
+              <div id="matrix-scrape-feedback" style="font-size: 12px; margin-top: 6px; color: var(--text-3);"></div>
+            </details>
+          </div>
+        </div>
+
+        <!-- Product Intelligence Overview -->
+        <div id="product-matrix-view" class="matrix-container hidden">
+          <div class="card product-summary-card" data-anim="fade-up">
+            <div class="prod-summary-header">
+              <div>
+                <span id="prod-category-badge" class="badge badge-category">Category</span>
+                <h3 id="prod-title">Product Name</h3>
+              </div>
+              <div class="overall-kpi">
+                <div class="kpi-label">Avg Net Sentiment (NSS)</div>
+                <div id="prod-avg-nss" class="kpi-value">+0%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Scorecards & Sub-Aspects -->
+          <div id="category-cards-container" class="category-grid">
+            <!-- Dynamic Category Accordion Cards Injected Here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- TAB 3: PRODUCT COMPARATOR                                           -->
+      <!-- =================================================================== -->
+      <section id="tab-compare" class="tab-pane" role="tabpanel">
+        <div class="pane-header" data-anim="fade-up">
+          <h2>⚔️ Head-to-Head Comparator</h2>
+          <p>Benchmark two products side-by-side across canonical categories to uncover competitive advantages.</p>
+        </div>
+
+        <!-- Comparison Selectors -->
+        <div class="card controls-card" data-anim="fade-up">
+          <div class="comparison-selectors">
+            <div class="compare-col">
+              <label for="compare-prod-a" class="control-label">Product A (Indigo)</label>
+              <select id="compare-prod-a" class="form-select"></select>
+            </div>
+            <div class="vs-badge">VS</div>
+            <div class="compare-col">
+              <label for="compare-prod-b" class="control-label">Product B (Cyan)</label>
+              <select id="compare-prod-b" class="form-select"></select>
+            </div>
+          </div>
+          <div class="compare-action-row">
+            <button id="btn-run-compare" class="btn btn-primary">
+              <span>⚔️</span> Run Benchmark
+            </button>
+          </div>
+        </div>
+
+        <!-- Comparison Results View -->
+        <div id="comparison-results" class="comparison-view hidden">
+          <!-- Winner Announcement Banner -->
+          <div id="winner-banner" class="winner-banner">
+            <div class="winner-trophy" id="winner-trophy">🏆</div>
+            <div class="winner-text">
+              <div class="winner-subtitle">BENCHMARK LEADER</div>
+              <div id="winner-title" class="winner-name">—</div>
+            </div>
+          </div>
+
+          <!-- Comparison Chart Card -->
+          <div class="card chart-card" data-anim="fade-up">
+            <div class="chart-header">
+              <h3>Category NSS Comparison</h3>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="compare-bar-chart"></canvas>
+            </div>
+          </div>
+
+          <!-- Detailed Comparison Table -->
+          <div class="card table-card" data-anim="fade-up">
+            <div class="table-header">
+              <h3>Category-by-Category Scorecard</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th id="th-prod-a">Product A (NSS)</th>
+                    <th id="th-prod-b">Product B (NSS)</th>
+                    <th>Winner</th>
+                    <th>Verdict</th>
+                  </tr>
+                </thead>
+                <tbody id="compare-table-body">
+                  <!-- Comparison Rows Injected Here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- TAB 3.5: LIVE E-COMMERCE URL COMPARATOR                             -->
+      <!-- =================================================================== -->
+      <section id="tab-url-compare" class="tab-pane" role="tabpanel">
+        <div class="pane-header" data-anim="fade-up">
+          <h2>🔗 Live E-Commerce URL Comparator</h2>
+          <p>Paste two product URLs from Amazon or Flipkart to scrape reviews in parallel, analyze customer sentiment, and benchmark them head-to-head.</p>
+        </div>
+
+        <!-- URL Comparison Input Card -->
+        <div class="card controls-card" data-anim="fade-up">
+          <div class="comparison-selectors url-compare-inputs-grid">
+            <!-- Product A Column -->
+            <div class="compare-col url-input-col">
+              <div class="input-header">
+                <label for="url-compare-a" class="control-label">Product A URL (Amazon / Flipkart)</label>
+                <span class="url-platform-badge" id="url-badge-a"></span>
+              </div>
+              <div class="url-input-wrapper">
+                <span class="url-input-icon">🔗</span>
+                <input type="url" id="url-compare-a" class="url-input" placeholder="Paste Product A URL (e.g. Amazon / Flipkart)..." autocomplete="off" spellcheck="false" />
+              </div>
+              <!-- Collapsible Fallback -->
+              <details class="fallback-details" id="fallback-details-a">
+                <summary class="fallback-summary">📝 Paste reviews manually (Fallback for Product A)</summary>
+                <div class="fallback-content">
+                  <textarea id="fallback-reviews-a" class="review-textarea fallback-textarea" rows="3" placeholder="Paste Product A reviews here, one review per line (min 20 chars)..."></textarea>
+                </div>
+              </details>
+            </div>
+
+            <div class="vs-badge">VS</div>
+
+            <!-- Product B Column -->
+            <div class="compare-col url-input-col">
+              <div class="input-header">
+                <label for="url-compare-b" class="control-label">Product B URL (Amazon / Flipkart)</label>
+                <span class="url-platform-badge" id="url-badge-b"></span>
+              </div>
+              <div class="url-input-wrapper">
+                <span class="url-input-icon">🔗</span>
+                <input type="url" id="url-compare-b" class="url-input" placeholder="Paste Product B URL (e.g. Amazon / Flipkart)..." autocomplete="off" spellcheck="false" />
+              </div>
+              <!-- Collapsible Fallback -->
+              <details class="fallback-details" id="fallback-details-b">
+                <summary class="fallback-summary">📝 Paste reviews manually (Fallback for Product B)</summary>
+                <div class="fallback-content">
+                  <textarea id="fallback-reviews-b" class="review-textarea fallback-textarea" rows="3" placeholder="Paste Product B reviews here, one review per line (min 20 chars)..."></textarea>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <!-- Quick presets & action button -->
+          <div class="compare-action-row">
+            <button id="btn-run-url-compare" class="btn btn-primary btn-run-compare">
+              <span>⚔️</span> Compare Live Products
+            </button>
+            <button id="btn-clear-url-compare" class="btn btn-secondary">Clear</button>
+          </div>
+
+          <div class="url-presets-bar">
+            <span class="presets-label">Quick Test Demos:</span>
+            <button class="preset-btn" id="demo-preset-phones">📱 iPhone 15 vs Galaxy S24 (Fallback Reviews Demo)</button>
+            <button class="preset-btn" id="demo-preset-audio">🎧 Sony WH-1000XM5 vs Bose QC45 (Live URLs Demo)</button>
+          </div>
+        </div>
+
+        <!-- Progress Tracker Card (Hidden by default) -->
+        <div id="url-compare-progress-card" class="card progress-card hidden" data-anim="fade-up">
+          <div class="progress-card-header">
+            <div class="progress-title-row">
+              <div class="scrape-loading-spinner small"></div>
+              <h3 id="url-progress-stage-title">Scraping Products...</h3>
+            </div>
+            <span id="url-progress-pct" class="badge badge-info">15%</span>
+          </div>
+
+          <!-- Stepper Dots -->
+          <div class="stepper-track">
+            <div class="stepper-step" data-step="Validating">
+              <div class="step-dot">1</div>
+              <span class="step-label">Validate</span>
+            </div>
+            <div class="stepper-line"></div>
+            <div class="stepper-step" data-step="Scraping A">
+              <div class="step-dot">2</div>
+              <span class="step-label">Scrape A</span>
+            </div>
+            <div class="stepper-line"></div>
+            <div class="stepper-step" data-step="Scraping B">
+              <div class="step-dot">3</div>
+              <span class="step-label">Scrape B</span>
+            </div>
+            <div class="stepper-line"></div>
+            <div class="stepper-step" data-step="Analyzing">
+              <div class="step-dot">4</div>
+              <span class="step-label">Analyze</span>
+            </div>
+            <div class="stepper-line"></div>
+            <div class="stepper-step" data-step="Comparing">
+              <div class="step-dot">5</div>
+              <span class="step-label">Compare</span>
+            </div>
+          </div>
+
+          <div class="progress-bar-bg">
+            <div id="url-progress-bar-fill" class="progress-bar-fill" style="width: 15%;"></div>
+          </div>
+          <p id="url-progress-subtext" class="progress-subtext">Initializing Playwright headless browser session...</p>
+        </div>
+
+        <!-- Error Card (Hidden by default) -->
+        <div id="url-compare-error-card" class="card error-card hidden" data-anim="fade-up">
+          <div class="error-banner-content">
+            <div class="error-icon">⚠️</div>
+            <div class="error-text-col">
+              <h4 id="url-error-title">Comparison Encountered an Error</h4>
+              <p id="url-error-message">One of the requested pages could not be scraped.</p>
+              <div class="error-actions">
+                <button id="btn-open-fallback-a" class="btn btn-outline btn-sm">Use Product A Fallback</button>
+                <button id="btn-open-fallback-b" class="btn btn-outline btn-sm">Use Product B Fallback</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparison Results View (Hidden by default) -->
+        <div id="url-comparison-results" class="comparison-view hidden">
+          <!-- Winner Announcement Banner -->
+          <div id="url-winner-banner" class="winner-banner">
+            <div class="winner-trophy" id="url-winner-trophy">🏆</div>
+            <div class="winner-text">
+              <div class="winner-subtitle">LIVE BENCHMARK WINNER</div>
+              <div id="url-winner-title" class="winner-name">—</div>
+              <p id="url-verdict-summary" class="winner-summary-text">—</p>
+            </div>
+          </div>
+
+          <!-- Product Overview Cards -->
+          <div class="url-products-overview-grid">
+            <div class="card prod-meta-card prod-a-card">
+              <div class="prod-badge-row">
+                <span class="badge badge-prod-a">Product A (Indigo)</span>
+                <span class="scrape-platform-pill" id="url-meta-platform-a">Amazon</span>
+              </div>
+              <h3 id="url-meta-title-a" class="url-prod-heading">Product A</h3>
+              <div class="prod-meta-stats">
+                <span>📝 <strong id="url-meta-revs-a">0</strong> Reviews</span>
+                <span>🔬 <strong id="url-meta-aspects-a">0</strong> Aspects</span>
+                <span>⭐ <strong id="url-meta-rating-a">—</strong> Rating</span>
+              </div>
+              <button id="btn-view-matrix-a" class="btn btn-outline btn-sm mt-3">📊 View in Product Matrix</button>
+            </div>
+
+            <div class="card prod-meta-card prod-b-card">
+              <div class="prod-badge-row">
+                <span class="badge badge-prod-b">Product B (Cyan)</span>
+                <span class="scrape-platform-pill" id="url-meta-platform-b">Flipkart</span>
+              </div>
+              <h3 id="url-meta-title-b" class="url-prod-heading">Product B</h3>
+              <div class="prod-meta-stats">
+                <span>📝 <strong id="url-meta-revs-b">0</strong> Reviews</span>
+                <span>🔬 <strong id="url-meta-aspects-b">0</strong> Aspects</span>
+                <span>⭐ <strong id="url-meta-rating-b">—</strong> Rating</span>
+              </div>
+              <button id="btn-view-matrix-b" class="btn btn-outline btn-sm mt-3">📊 View in Product Matrix</button>
+            </div>
+          </div>
+
+          <!-- Side-by-Side Category Chart Card -->
+          <div class="card chart-card" data-anim="fade-up">
+            <div class="chart-header">
+              <h3>Canonical Category NSS Comparison</h3>
+              <p class="chart-subtitle">Net Sentiment Score (-100% to +100%) side-by-side</p>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="url-compare-bar-chart"></canvas>
+            </div>
+          </div>
+
+          <!-- Head-to-Head Aspect Scorecard Table Card -->
+          <div class="card table-card" data-anim="fade-up">
+            <div class="table-header">
+              <div>
+                <h3>🔬 Granular Aspect Head-to-Head Scorecard</h3>
+                <p class="table-subtitle">Aspect-level matching with ≥5 mentions validation threshold and 5% tie margin.</p>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Aspect</th>
+                    <th id="url-th-prod-a">Product A (NSS / Mentions)</th>
+                    <th id="url-th-prod-b">Product B (NSS / Mentions)</th>
+                    <th>Winner / Status</th>
+                    <th>Verdict Note</th>
+                  </tr>
+                </thead>
+                <tbody id="url-compare-table-body">
+                  <!-- Rows injected dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Raw JSON Details Viewer -->
+          <details class="json-viewer mt-4">
+            <summary>View Full Comparison JSON API Response</summary>
+            <pre id="url-compare-raw-json">{}</pre>
+          </details>
+        </div>
+      </section>
+
+      <!-- =================================================================== -->
+      <!-- TAB 4: DATASET & EDA ANALYTICS                                      -->
+      <!-- =================================================================== -->
+      <section id="tab-analytics" class="tab-pane" role="tabpanel">
+        <div class="pane-header" data-anim="fade-up">
+          <h2>📈 Dataset & EDA Analytics</h2>
+          <p>Statistical breakdown of the customer review dataset — rating distribution, category analysis, and CSV exports.</p>
+        </div>
+
+        <!-- KPI Stat Counter Row -->
+        <div class="kpi-grid" id="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-number" id="eda-total-reviews" data-target="0">0</div>
+            <div class="kpi-label">Total Reviews</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-number" id="eda-unique-products" data-target="0">0</div>
+            <div class="kpi-label">Products Analyzed</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-number" id="eda-unique-categories" data-target="0">0</div>
+            <div class="kpi-label">Categories</div>
+          </div>
+          <div class="kpi-card">
+            <div class="kpi-number" id="eda-multi-aspect-pct" data-target="0">0%</div>
+            <div class="kpi-label">Multi-Aspect Density</div>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="analytics-charts-grid">
+          <div class="card chart-card" data-anim="fade-up">
+            <div class="chart-header">
+              <h3>Star Rating Distribution</h3>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="eda-rating-chart"></canvas>
+            </div>
+          </div>
+          <div class="card chart-card" data-anim="fade-up">
+            <div class="chart-header">
+              <h3>Reviews by Product Category</h3>
+            </div>
+            <div class="chart-wrapper">
+              <canvas id="eda-category-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Exports Card -->
+        <div class="card export-card" data-anim="fade-up">
+          <div class="export-header">
+            <div>
+              <h3>📥 Export CSV Datasets</h3>
+              <p>Download ML-ready datasets generated by the ABSA pipeline.</p>
+            </div>
+          </div>
+          <div class="export-buttons-row">
+            <a href="/api/exports/aspect_sentiment_results.csv" download class="btn btn-outline">
+              📄 Aspects CSV
+            </a>
+            <a href="/api/exports/category_aspect_matrix.csv" download class="btn btn-outline">
+              📊 Matrix CSV
+            </a>
+            <a href="/api/exports/product_comparison.csv" download class="btn btn-outline">
+              ⚔️ Comparison CSV
+            </a>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-content">
+        <p>AspectLens — ABSA Engine • TypeScript / Node.js • Powered by GSAP</p>
+      </div>
+    </footer>
+
+  </div><!-- end .app-shell -->
+
+  <!-- Sign-In Overlay Modal -->
+  <div class="auth-overlay" id="auth-overlay" style="display:none">
+    <div class="auth-overlay-backdrop" id="auth-overlay-backdrop"></div>
+    <div class="auth-overlay-content">
+      <button class="auth-overlay-close" id="auth-overlay-close">&times;</button>
+      <div id="clerk-sign-in-mount"></div>
+    </div>
+  </div>
+
+  <!-- App Script -->
+  <script src="/app.js"></script>
+</body>
+</html>

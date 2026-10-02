@@ -1,0 +1,42 @@
+{
+  "name": "aspect-based-feedback-summarizer",
+  "version": "1.0.0",
+  "description": "Aspect-Based E-Commerce Product Feedback Summarizer (ABSA) in TypeScript",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "test:preprocess": "tsx src/preprocess.ts",
+    "test:aspect": "tsx src/aspectExtraction.ts",
+    "test:sentiment": "tsx src/sentiment.ts",
+    "test:loader": "tsx src/datasetLoader.ts",
+    "test:clustering": "tsx src/aspectClustering.ts",
+    "pipeline:sample": "tsx src/index.ts --dataset sample",
+    "pipeline:kaggle": "tsx src/index.ts --dataset kaggle --sample-size 50 --eda --export",
+    "pipeline:compare": "tsx src/index.ts --dataset kaggle --compare \"iPhone 15 Pro\" \"Galaxy S24 Ultra\" --export",
+    "serve": "tsx src/server.ts",
+    "dev:server": "tsx watch src/server.ts"
+  },
+  "keywords": [
+    "absa",
+    "nlp",
+    "sentiment-analysis",
+    "aspect-extraction",
+    "ecommerce",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "dependencies": {
+    "@clerk/backend": "^3.20.1",
+    "cheerio": "^1.2.0",
+    "playwright": "^1.63.0"
+  }
+}

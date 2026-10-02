@@ -1,0 +1,106 @@
+review_id,product_id,product_name,category,rating,review_text,verified_purchase
+1,PROD_AUDIO_01,Sony WH-1000XM5 Wireless Headphones,Audio,4,"The active noise cancellation is phenomenal and sound quality is crisp, but the headband gets uncomfortable during long flights.",True
+2,PROD_AUDIO_01,Sony WH-1000XM5 Wireless Headphones,Audio,5,"Call quality is crystal clear and battery life easily lasts over 30 hours! <br /> Truly premium build.",True
+3,PROD_AUDIO_01,Sony WH-1000XM5 Wireless Headphones,Audio,2,"Sound is good, but the touch controls are glitchy and customer support was completely unhelpful.",True
+4,PROD_AUDIO_01,Sony WH-1000XM5 Wireless Headphones,Audio,4,"Bass response is deep and powerful, though the companion app is slow to connect.",False
+5,PROD_AUDIO_01,Sony WH-1000XM5 Wireless Headphones,Audio,3,"Bluetooth connection is stable and microphone is decent, but the ear cups make my ears sweat.",True
+6,PROD_AUDIO_02,Apple AirPods Pro 2,Audio,5,"Transparency mode is magical and noise reduction is outstanding! Spatial audio works like a charm.",True
+7,PROD_AUDIO_02,Apple AirPods Pro 2,Audio,4,"Sound clarity is impressive and charging case is compact, but battery backup could be better.",True
+8,PROD_AUDIO_02,Apple AirPods Pro 2,Audio,2,"Audio quality is great, but the silicone ear tips are uncomfortable and keep falling out while running.",True
+9,PROD_AUDIO_02,Apple AirPods Pro 2,Audio,5,"Noise cancellation is top tier and microphone clarity during zoom calls is exceptional.",True
+10,PROD_AUDIO_02,Apple AirPods Pro 2,Audio,3,"Fit is decent and pairing speed is instantaneous, but the retail price is way too high.",True
+11,PROD_PHONE_01,Apple iPhone 15 Pro,Smartphones,5,"The titanium frame is lightweight and display is stunningly bright! Battery life easily lasts 1.5 days.",True
+12,PROD_PHONE_01,Apple iPhone 15 Pro,Smartphones,3,"Camera performance in daylight is phenomenal, but low light photos look grainy and device heats up quickly.",True
+13,PROD_PHONE_01,Apple iPhone 15 Pro,Smartphones,4,"Action button is super convenient and speakers are loud, though charging speed is noticeably slow.",True
+14,PROD_PHONE_01,Apple iPhone 15 Pro,Smartphones,2,"The screen refresh rate is smooth, but battery drain is terrible and back glass feels fragile.",True
+15,PROD_PHONE_01,Apple iPhone 15 Pro,Smartphones,5,"Video recording quality is unbeatable and iOS performance is silky smooth with zero lag.",True
+16,PROD_PHONE_02,Samsung Galaxy S24 Ultra,Smartphones,5,"The anti-reflective screen is gorgeous and zoom camera is insane! S-pen functionality is super handy.",True
+17,PROD_PHONE_02,Samsung Galaxy S24 Ultra,Smartphones,4,"Battery endurance is incredible and display brightness is unmatched, but the sharp corners hurt my palm.",True
+18,PROD_PHONE_02,Samsung Galaxy S24 Ultra,Smartphones,2,"Camera processing oversaturates colors and shutter lag is frustrating when taking photos of pets.",True
+19,PROD_PHONE_02,Samsung Galaxy S24 Ultra,Smartphones,4,"AI features are surprisingly useful and build quality is rock solid, but phone is bulky and heavy.",True
+20,PROD_PHONE_02,Samsung Galaxy S24 Ultra,Smartphones,3,"Fast charging works reliably, but fingerprint sensor is inconsistent on dry fingers.",True
+21,PROD_PHONE_03,Google Pixel 8,Smartphones,4,"Camera quality is spectacular and voice dictation is accurate, but battery life is mediocre.",True
+22,PROD_PHONE_03,Google Pixel 8,Smartphones,2,"Photo processing is great, but cellular reception is weak and fingerprint scanner is slow.",True
+23,PROD_PHONE_03,Google Pixel 8,Smartphones,5,"Display colors are vibrant and Android UI is clean, plus the 7-year software update promise is reassuring.",True
+24,PROD_PHONE_03,Google Pixel 8,Smartphones,3,"Form factor is compact and comfortable in hand, but gaming performance stutters under heavy load.",True
+25,PROD_PHONE_03,Google Pixel 8,Smartphones,2,"Screen brightness outdoors is disappointing and charging speed is frustratingly slow.",True
+26,PROD_LAPTOP_01,Apple MacBook Air M2,Laptops,5,"Battery life is mind-blowing lasting 16 hours, trackpad is buttery smooth, and silent fanless design is a dream.",True
+27,PROD_LAPTOP_01,Apple MacBook Air M2,Laptops,4,"Keyboard feel is clicky and responsive, but 8GB base RAM memory is insufficient for video editing.",True
+28,PROD_LAPTOP_01,Apple MacBook Air M2,Laptops,5,"Display sharpness is brilliant and MagSafe charging port is super convenient. Lightweight chassis!",True
+29,PROD_LAPTOP_01,Apple MacBook Air M2,Laptops,3,"Speakers sound amazing for a thin laptop, but port selection is limited with only 2 USB-C ports.",True
+30,PROD_LAPTOP_01,Apple MacBook Air M2,Laptops,4,"Boot speed is instantaneous and build quality is flawless, though midnight finish attracts fingerprint smudges.",True
+31,PROD_LAPTOP_02,Dell XPS 15 OLED,Laptops,4,"OLED display is breathtaking with deep blacks, but battery life is mediocre at just 5 hours.",True
+32,PROD_LAPTOP_02,Dell XPS 15 OLED,Laptops,2,"Performance is fast, but fan noise is ridiculously loud and cooling system thermal throttles constantly.",True
+33,PROD_LAPTOP_02,Dell XPS 15 OLED,Laptops,4,"Carbon fiber keyboard deck is comfortable and speakers are rich, but webcam resolution is grainy.",True
+34,PROD_LAPTOP_02,Dell XPS 15 OLED,Laptops,1,"Trackpad was rattling out of the box and customer service refused replacement. Terrible experience.",True
+35,PROD_LAPTOP_02,Dell XPS 15 OLED,Laptops,5,"Build quality feels exceptionally sturdy and graphic rendering speed is blazing fast.",True
+36,PROD_LAPTOP_03,Lenovo Legion Pro 5 Gaming Laptop,Laptops,5,"Gaming performance is stellar with high framerates, and cooling fans keep temperatures manageable.",True
+37,PROD_LAPTOP_03,Lenovo Legion Pro 5 Gaming Laptop,Laptops,3,"Display refresh rate is silky smooth, but power adapter brick is massive and heavy to carry.",True
+38,PROD_LAPTOP_03,Lenovo Legion Pro 5 Gaming Laptop,Laptops,4,"Keyboard layout is ergonomic for typing, but internal speakers sound tinny with weak bass.",True
+39,PROD_LAPTOP_03,Lenovo Legion Pro 5 Gaming Laptop,Laptops,2,"Performance is good, but battery backup lasts barely 2 hours and chassis is made of cheap plastic.",True
+40,PROD_LAPTOP_03,Lenovo Legion Pro 5 Gaming Laptop,Laptops,5,"RGB keyboard lighting is customizable and port selection on the rear is well thought out.",True
+41,PROD_WATCH_01,Apple Watch Series 9,Wearables,5,"Double tap gesture is intuitive and heart rate tracking is remarkably accurate! Bright outdoor screen.",True
+42,PROD_WATCH_01,Apple Watch Series 9,Wearables,3,"Fitness tracking algorithms are reliable, but battery life requires daily charging which is annoying.",True
+43,PROD_WATCH_01,Apple Watch Series 9,Wearables,4,"Sleep tracking metrics are insightful and display glass is scratch resistant, but strap is stiff.",True
+44,PROD_WATCH_01,Apple Watch Series 9,Wearables,2,"Siri response is fast, but blood oxygen sensor was disabled due to patent disputes.",True
+45,PROD_WATCH_01,Apple Watch Series 9,Wearables,5,"Haptic feedback feels natural and watch face customization is extensive.",True
+46,PROD_WATCH_02,Garmin Forerunner 265,Wearables,5,"GPS accuracy is pinpoint and battery endurance lasts 12 days effortlessly! AMOLED screen is gorgeous.",True
+47,PROD_WATCH_02,Garmin Forerunner 265,Wearables,4,"Running metrics and recovery suggestions are thorough, though Garmin Connect app UI is confusing.",True
+48,PROD_WATCH_02,Garmin Forerunner 265,Wearables,4,"Heart rate sensor responds instantly during interval training, but watch casing feels plastic.",True
+49,PROD_WATCH_02,Garmin Forerunner 265,Wearables,3,"Button controls work reliably with sweaty hands, but smart notification features are basic.",True
+50,PROD_WATCH_02,Garmin Forerunner 265,Wearables,5,"Water resistance is robust for lap swimming and lightweight design makes it unnoticeable on wrist.",True
+51,PROD_HOME_01,Dyson V15 Detect Cordless Vacuum,Home Appliances,5,"Laser illumination reveals invisible dust and suction power is phenomenal on hardwood floors!",True
+52,PROD_HOME_01,Dyson V15 Detect Cordless Vacuum,Home Appliances,3,"Cleaning efficiency is unmatched, but trigger button causes hand fatigue and battery run time is short on boost mode.",True
+53,PROD_HOME_01,Dyson V15 Detect Cordless Vacuum,Home Appliances,4,"Hair screw tool untangles pet hair effortlessly, though dustbin emptying mechanism can get messy.",True
+54,PROD_HOME_01,Dyson V15 Detect Cordless Vacuum,Home Appliances,2,"Suction is great, but plastic wand cracked within 4 months and replacement parts are prohibitively expensive.",True
+55,PROD_HOME_01,Dyson V15 Detect Cordless Vacuum,Home Appliances,5,"LCD screen gives real-time particle counts and filtration system keeps indoor air fresh.",True
+56,PROD_HOME_02,Instant Pot Duo 7-in-1 Pressure Cooker,Home Appliances,5,"Pressure cooking speed is rapid and stainless steel inner pot is durable and easy to wash!",True
+57,PROD_HOME_02,Instant Pot Duo 7-in-1 Pressure Cooker,Home Appliances,4,"Sauté function heats up quickly, but silicone sealing ring absorbs strong curry odors permanently.",True
+58,PROD_HOME_02,Instant Pot Duo 7-in-1 Pressure Cooker,Home Appliances,4,"Slow cooker mode works well for stews, but user manual instructions are poorly written.",True
+59,PROD_HOME_02,Instant Pot Duo 7-in-1 Pressure Cooker,Home Appliances,2,"Cooking performance is fine, but steam release valve got stuck and safety latch is loose.",True
+60,PROD_HOME_02,Instant Pot Duo 7-in-1 Pressure Cooker,Home Appliances,5,"Safety features prevent accidental burns and programmable presets make weekday meal prep effortless.",True
+61,PROD_HOME_03,Breville Barista Touch Espresso Machine,Home Appliances,5,"Espresso extraction is rich with thick crema, and automatic steam wand texturizes milk perfectly!",True
+62,PROD_HOME_03,Breville Barista Touch Espresso Machine,Home Appliances,4,"Touchscreen interface is responsive and intuitive, but water reservoir requires frequent refills.",True
+63,PROD_HOME_03,Breville Barista Touch Espresso Machine,Home Appliances,3,"Coffee taste is barista-level, but integrated conical burr grinder is noisy in early mornings.",True
+64,PROD_HOME_03,Breville Barista Touch Espresso Machine,Home Appliances,2,"Coffee quality is wonderful, but descaling cycle is complicated and machine leaked from bottom.",True
+65,PROD_HOME_03,Breville Barista Touch Espresso Machine,Home Appliances,5,"Pre-infusion function enhances espresso flavor balance and stainless steel aesthetic looks magnificent on kitchen counter.",True
+66,PROD_HOME_04,iRobot Roomba j7+ Robot Vacuum,Home Appliances,4,"Obstacle avoidance successfully navigates around cables and pet toys, but navigation map took 4 tries to finalize.",True
+67,PROD_HOME_04,iRobot Roomba j7+ Robot Vacuum,Home Appliances,5,"Self-emptying base station is convenient and scheduling feature via mobile app works seamlessly.",True
+68,PROD_HOME_04,iRobot Roomba j7+ Robot Vacuum,Home Appliances,2,"Corner cleaning is weak with single side brush and dust collection bag runs out too fast.",True
+69,PROD_HOME_04,iRobot Roomba j7+ Robot Vacuum,Home Appliances,4,"Edge-sweeping brush reaches along baseboards well, but roller wheels get stuck on thick shaggy rugs.",True
+70,PROD_HOME_04,iRobot Roomba j7+ Robot Vacuum,Home Appliances,3,"Voice assistant integration with Alexa is responsive, but auto-empty suction noise is deafeningly loud.",True
+71,PROD_SHOE_01,Nike Pegasus 40 Running Shoes,Footwear,5,"Midsole cushioning feels soft and responsive during long 10k road runs. True to size fit!",True
+72,PROD_SHOE_01,Nike Pegasus 40 Running Shoes,Footwear,4,"Engineered mesh upper provides excellent breathability, but outsole grip is slippery on wet asphalt.",True
+73,PROD_SHOE_01,Nike Pegasus 40 Running Shoes,Footwear,3,"Heel collar padding is comfortable, but toe box width is slightly narrow for wide feet.",True
+74,PROD_SHOE_01,Nike Pegasus 40 Running Shoes,Footwear,5,"Durability is outstanding with zero tread wear after 200 miles. Reliable daily trainer shoe.",True
+75,PROD_SHOE_01,Nike Pegasus 40 Running Shoes,Footwear,2,"Design looks sleek, but arch support is inadequate and insoles caused painful heel blisters.",True
+76,PROD_SHOE_02,Brooks Ghost 15 Running Shoes,Footwear,5,"Shock absorption is plush and smooth heel-to-toe transitions make marathon training effortless.",True
+77,PROD_SHOE_02,Brooks Ghost 15 Running Shoes,Footwear,4,"Ankle collar offers snug lockdown and rubber outsole has phenomenal traction on gravel paths.",True
+78,PROD_SHOE_02,Brooks Ghost 15 Running Shoes,Footwear,3,"Comfort is top notch for walking, but colorways look bland and grandma-like in person.",True
+79,PROD_SHOE_02,Brooks Ghost 15 Running Shoes,Footwear,4,"Fabric lining is soft against skin, but shoe weight feels somewhat heavy compared to racing shoes.",True
+80,PROD_SHOE_02,Brooks Ghost 15 Running Shoes,Footwear,2,"Stitching along the eyelets unraveled within two weeks of light gym use. Disappointed with build quality.",True
+81,PROD_CLOTH_01,Levi's 511 Slim Fit Jeans,Apparel,4,"Denim fabric has comfortable stretch and stitching is durable, but color faded noticeably after first cold wash.",True
+82,PROD_CLOTH_01,Levi's 511 Slim Fit Jeans,Apparel,5,"Fit around thighs and calves is tailored and modern! Pocket depth is roomy enough for large smartphones.",True
+83,PROD_CLOTH_01,Levi's 511 Slim Fit Jeans,Apparel,2,"Waist size is smaller than standard sizing charts and zipper is stiff and gets jammed easily.",True
+84,PROD_CLOTH_01,Levi's 511 Slim Fit Jeans,Apparel,4,"Material weight is substantial and belt loops are reinforced securely, though length is slightly too long.",True
+85,PROD_CLOTH_01,Levi's 511 Slim Fit Jeans,Apparel,3,"Look and styling are versatile, but button hole stitching is loose and prone to fraying.",True
+86,PROD_CLOTH_02,Patagonia Better Sweater Fleece Jacket,Apparel,5,"Knitted fleece exterior looks sharp and thermal warmth is cozy in chilly autumn temperatures!",True
+87,PROD_CLOTH_02,Patagonia Better Sweater Fleece Jacket,Apparel,4,"Zipper pull is smooth and zippered handwarmer pockets are spacious, but sleeve length is slightly tight around wrists.",True
+88,PROD_CLOTH_02,Patagonia Better Sweater Fleece Jacket,Apparel,3,"Eco-friendly recycled polyester fabric is commendable, but fleece pilling occurs on underarms after washing.",True
+89,PROD_CLOTH_02,Patagonia Better Sweater Fleece Jacket,Apparel,5,"Stand-up collar shields wind effectively and flat-seam construction prevents skin chafing.",True
+90,PROD_CLOTH_02,Patagonia Better Sweater Fleece Jacket,Apparel,2,"Warmth is good, but inner lining feels scratchy against bare arms and sizing runs baggy in torso.",True
+91,PROD_TV_01,LG C3 65-Inch OLED 4K TV,Electronics,5,"Contrast ratio is infinite with true ink blacks and HDR peak brightness makes movies immersive!",True
+92,PROD_TV_01,LG C3 65-Inch OLED 4K TV,Electronics,4,"Gaming response time is instantaneous with 120Hz refresh rate, but webOS smart menu is cluttered with ads.",True
+93,PROD_TV_01,LG C3 65-Inch OLED 4K TV,Electronics,3,"Picture quality is breathtaking, but built-in speaker audio is flat and tinny. External soundbar needed.",True
+94,PROD_TV_01,LG C3 65-Inch OLED 4K TV,Electronics,5,"Viewing angles are flawless with zero color shifting from side seating. Ultra thin bezel design.",True
+95,PROD_TV_01,LG C3 65-Inch OLED 4K TV,Electronics,2,"Display panel developed dead pixels in bottom right corner after 6 weeks. Warranty claim was frustrating.",True
+96,PROD_TV_02,Sony Bravia XR A80L OLED TV,Electronics,5,"Acoustic surface audio emits sound directly from the screen and picture processing is natural and lifelike!",True
+97,PROD_TV_02,Sony Bravia XR A80L OLED TV,Electronics,4,"Google TV interface is clean and snappy, but the remote control lacks backlighting in dark rooms.",True
+98,PROD_TV_02,Sony Bravia XR A80L OLED TV,Electronics,4,"Upscaling on old 1080p content is exceptional, though glare reflection is noticeable in bright sunlit living rooms.",True
+99,PROD_TV_02,Sony Bravia XR A80L OLED TV,Electronics,2,"Screen quality is gorgeous, but HDMI port handshakes intermittently drop audio with AV receiver.",True
+100,PROD_TV_02,Sony Bravia XR A80L OLED TV,Electronics,5,"Motion clarity during football broadcasts is fluid with zero judder or artifacting.",True
+101,PROD_KINDLE_01,Amazon Kindle Paperwhite 11th Gen,Electronics,5,"Warm adjustable front light reduces eye strain and battery lasts weeks on a single charge! Waterproof design.",True
+102,PROD_KINDLE_01,Amazon Kindle Paperwhite 11th Gen,Electronics,4,"Page turn speed is fast and 300 ppi text resolution is razor sharp, but lockscreen ads are intrusive.",True
+103,PROD_KINDLE_01,Amazon Kindle Paperwhite 11th Gen,Electronics,3,"USB-C charging port is modern, but rubberized back cover collects oily fingerprint marks easily.",True
+104,PROD_KINDLE_01,Amazon Kindle Paperwhite 11th Gen,Electronics,5,"Flush-front screen feels premium and pocketable size makes reading in bed a delight.",True
+105,PROD_KINDLE_01,Amazon Kindle Paperwhite 11th Gen,Electronics,2,"Screen clarity is good, but touch registration is sluggish when browsing store catalog.",True
